@@ -5,6 +5,7 @@ import com.houshl.mall.product.response.ObjectResponse;
 import com.houshl.mall.product.response.ResponseUtils;
 import com.houshl.mall.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +22,12 @@ public class ProductController {
     @RequestMapping("/save")
     public ObjectResponse save(Product product) throws Exception {
         Product res = productService.save(product);
+        return ResponseUtils.ok(res);
+    }
+
+    @RequestMapping("/{id}")
+    public ObjectResponse find(@PathVariable("id") Long id) throws Exception {
+        Product res = productService.find(id);
         return ResponseUtils.ok(res);
     }
 }

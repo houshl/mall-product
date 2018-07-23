@@ -9,4 +9,6 @@ public interface ProductService {
 
     Product save(Product product) throws Exception;
 
+    Product find(Long id) throws Exception;
+
 }
