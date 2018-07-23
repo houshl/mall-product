@@ -11,7 +11,8 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
+
+import java.util.List;
 
 /**
  * Created by houshuanglong on 2018/7/23.
@@ -45,5 +46,12 @@ public class ProductServiceImpl implements ProductService {
     public Product find(Long id) throws Exception {
         Product product = productRepository.findOne(id);
         return product;
+    }
+
+    @Override
+    @Cacheable
+    public List<Product> list() throws Exception {
+        List<Product> productList = productRepository.findAll();
+        return productList;
     }
 }
