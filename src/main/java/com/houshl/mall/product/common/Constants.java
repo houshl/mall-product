@@ -12,4 +12,8 @@ public class Constants {
 
     public static final int PROMPT_EX_CODE = 50010;
 
+    public static final String PRODUCT_EXCHANGE="product.direct";
+
+    public static final String PRODUCT_NEW_QUEUE="product.new.queue";
+
 }

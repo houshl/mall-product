@@ -1,9 +1,11 @@
 package com.houshl.mall.product.service.impl;
 
 import com.houshl.mall.product.common.CommonUtils;
+import com.houshl.mall.product.common.Constants;
 import com.houshl.mall.product.model.Product;
 import com.houshl.mall.product.repository.ProductRepository;
 import com.houshl.mall.product.service.ProductService;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
@@ -24,6 +26,9 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     ProductRepository productRepository;
 
+    @Autowired
+    RabbitTemplate rabbitTemplate;
+
     @Override
     @Transactional(rollbackFor = Exception.class)
     @CachePut(key = "\"product:\"+#product.id")
@@ -37,6 +42,8 @@ public class ProductServiceImpl implements ProductService {
             product.setCreateTime(System.currentTimeMillis());
             res = productRepository.save(product);
         }
+
+        rabbitTemplate.convertAndSend(Constants.PRODUCT_EXCHANGE, "product:new", res);
 
         return res;
     }

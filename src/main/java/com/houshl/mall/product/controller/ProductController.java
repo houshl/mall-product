@@ -4,6 +4,7 @@ import com.houshl.mall.product.model.Product;
 import com.houshl.mall.product.response.ObjectResponse;
 import com.houshl.mall.product.response.ResponseUtils;
 import com.houshl.mall.product.service.ProductService;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
